@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter & Colab Checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Model checkpoints and logs
+logs/
+runs/
+*.h5
+*.keras
+*.pt
+*.pth
+*.tflite
+
+# Local datasets & archives
+dataset/
+dataset_yolo/
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env
+.env.local
+
+# IDE & Operating System
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
