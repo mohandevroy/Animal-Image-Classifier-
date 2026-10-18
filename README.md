@@ -1,8 +1,8 @@
-# Multiclass_Image_Classifier
+# CSE445-Machine Learning-Project: Animal-Image-Classifier
 # 🐾 Multiclass Animal Image Classification using CNN and YOLOv11
 
 ## 📌 Project Overview
-This project focuses on building a **custom image classification system** using a **Convolutional Neural Network (CNN) with a Sequential architecture** and **YOLOv11**.  
+This is our academic machine learning project for **CSE445**. It focuses on building a **custom image classification system** using a **Convolutional Neural Network (CNN) with a Sequential architecture** and **YOLOv11**.  
 The model classifies images into **five animal classes**: **Dog, Cow, Cat, Lamb, and Zebra**.
 
 A custom dataset was created with **100 images per class**, collected from the internet and real-world captures.  
@@ -90,7 +90,5 @@ The trained models can predict the class of a **new unseen image** and output th
 
 Install dependencies:
 ```bash
-pip install tensorflow numpy matplotlib
+pip install -r requirements.txt
 ```
-
-
