@@ -29,6 +29,7 @@ The trained model achieves **at least 90% classification accuracy**.
 - **Total images**: 500
 - **Image source**: Internet + mobile phone camera
 - **Image size**: Resized to a fixed resolution before training
+- **Dataset Link**: [Google Drive Dataset Folder](https://drive.google.com/drive/folders/1SdRlRL4PUU4nPxfkYQYQNeQKAIEO4JkF?usp=sharing)
 
 ### Dataset Structure
 ```
