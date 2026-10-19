@@ -78,6 +78,18 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 - Accepts an arbitrary test image path via `--image <path>`.
 - Preprocesses input, executes model forward pass, and prints predicted label alongside ranked confidence percentages for all 5 animal classes.
 
+### Milestone 7 (October 20): Pull Request Merge, Automated Unit Testing & Visual Analytics
+- **PR #1 Merged into `main`**: Submitted formal Pull Request `#1` from `Samiun-Mahmud` to `main`. Successfully resolved merge conflicts on `README.md` and merged all core CNN code into the project's primary branch (`17fe466`).
+- **Automated Unit Testing (`tests/test_model.py`)**:
+  - Implemented unit test suite using `unittest` to guarantee architecture validity and numerical stability.
+  - Verified input tensor constraints `(None, 256, 256, 3)` and output tensor constraints `(None, 5)`.
+  - Added assertion testing to ensure Softmax activation generates valid probability distributions strictly summing to 1.0.
+  - Confirmed 3-block convolutional layering and dense classification head without dimension mismatches.
+- **Visual Analytics Generation (`results/`)**:
+  - Generated high-resolution confusion matrix heatmap (`results/confusion_matrix.png`) illustrating 100% test classification accuracy across Cat, Cow, Dog, Lamb, and Zebra.
+  - Generated 20-epoch training and validation loss and accuracy progression curves (`results/training_curves.png`).
+  - Embedded visual analytics into both `README.md` and `CONTRIBUTIONS_SAMIUN.md`.
+
 ---
 
 ## 📊 Experimental Results (CNN Classifier)
@@ -108,13 +120,21 @@ Animal-Image-Classifier-/
 ├── .gitignore                    # Project ignore rules
 ├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log
 ├── Dataset Drive Link            # Cloud dataset reference link
+├── README.md                     # Project documentation & visual results
+├── requirements.txt              # Dependency specifications
 ├── main/
 │   └── cnncl.ipynb               # Baseline CNN exploration notebook
-└── src/
-    ├── __init__.py               # Package initializer
-    ├── model.py                  # CNN Sequential architecture definition
-    ├── data_loader.py            # Dataset loading, scaling, and splitting
-    ├── train.py                  # CLI training script with callbacks
-    ├── evaluate.py               # Test evaluation and confusion matrix
-    └── predict.py                # Single image inference CLI
+├── results/
+│   ├── confusion_matrix.png      # 100% test accuracy heatmap
+│   └── training_curves.png       # 20-epoch loss and accuracy plots
+├── src/
+│   ├── __init__.py               # Package initializer
+│   ├── model.py                  # CNN Sequential architecture definition
+│   ├── data_loader.py            # Dataset loading, scaling, and splitting
+│   ├── train.py                  # CLI training script with callbacks
+│   ├── evaluate.py               # Test evaluation and confusion matrix
+│   └── predict.py                # Single image inference CLI
+└── tests/
+    ├── __init__.py               # Test package initializer
+    └── test_model.py             # Automated unit tests for CNN architecture
 ```
