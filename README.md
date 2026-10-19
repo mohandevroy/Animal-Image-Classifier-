@@ -74,6 +74,12 @@ The model is built using **Keras Sequential API** with the following layers:
 - **YOLOv11 based Classifier Accuracy**: 94%
 - The models successfully distinguish between all five animal classes.
 
+### 📈 Training & Validation Curves
+![Training Curves](results/training_curves.png)
+
+### 🎯 Confusion Matrix
+![Confusion Matrix](results/confusion_matrix.png)
+
 ---
 
 ## 🧪 Testing & Prediction

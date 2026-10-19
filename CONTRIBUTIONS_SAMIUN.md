@@ -91,6 +91,14 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 | **Recall (All 5 classes)** | **1.00** | Zero misclassifications |
 | **F1-Score (All 5 classes)** | **1.00** | Harmonic mean of precision & recall |
 
+### Performance Visualizations
+<p align="center">
+  <img src="results/training_curves.png" alt="Training & Validation Curves" width="70%" />
+</p>
+<p align="center">
+  <img src="results/confusion_matrix.png" alt="Confusion Matrix Heatmap" width="50%" />
+</p>
+
 ---
 
 ## 📂 Files Authored by Samiun Mahmud
