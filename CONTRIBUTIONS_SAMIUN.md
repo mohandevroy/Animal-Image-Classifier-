@@ -90,6 +90,17 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
   - Generated 20-epoch training and validation loss and accuracy progression curves (`results/training_curves.png`).
   - Embedded visual analytics into both `README.md` and `CONTRIBUTIONS_SAMIUN.md`.
 
+### Milestone 8 (October 21): Web UI Deployment, Data Augmentation & Demo Runner
+- **Interactive Streamlit Web Application (`app.py`)**:
+  - Engineered an interactive web application allowing users to drag-and-drop animal images and view instant classifications.
+  - Formulated real-time probability visualization bars with emoji badges for all 5 animal classes (Cat, Cow, Dog, Lamb, Zebra).
+  - Integrated graceful fallback handling for quick local testing and evaluation presentations.
+- **Data Augmentation Pipeline Formulation (`src/augment.py`)**:
+  - Implemented `build_augmentation_pipeline()` applying `RandomFlip("horizontal")`, `RandomRotation(0.1)`, `RandomZoom(0.1)`, and `RandomContrast(0.1)` to combat potential overfitting and increase model robustness against noisy, unstandardized user photos.
+  - Linked augmentation layer to the `src` package API.
+- **One-Click End-to-End Pipeline Demo (`scripts/demo.py`)**:
+  - Developed standalone demo script verifying preprocessing, inference formatting, and producing visual prediction reports saved directly to `results/demo_prediction.png`.
+
 ---
 
 ## 📊 Experimental Results (CNN Classifier)
@@ -118,6 +129,7 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 ```
 Animal-Image-Classifier-/
 ├── .gitignore                    # Project ignore rules
+├── app.py                        # Streamlit interactive web application
 ├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log
 ├── Dataset Drive Link            # Cloud dataset reference link
 ├── README.md                     # Project documentation & visual results
@@ -126,9 +138,13 @@ Animal-Image-Classifier-/
 │   └── cnncl.ipynb               # Baseline CNN exploration notebook
 ├── results/
 │   ├── confusion_matrix.png      # 100% test accuracy heatmap
+│   ├── demo_prediction.png       # Inference pipeline verification report
 │   └── training_curves.png       # 20-epoch loss and accuracy plots
+├── scripts/
+│   └── demo.py                   # One-click standalone demo runner
 ├── src/
 │   ├── __init__.py               # Package initializer
+│   ├── augment.py                # Data augmentation pipeline (flips, rotations, zooms)
 │   ├── model.py                  # CNN Sequential architecture definition
 │   ├── data_loader.py            # Dataset loading, scaling, and splitting
 │   ├── train.py                  # CLI training script with callbacks
