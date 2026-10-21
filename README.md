@@ -74,10 +74,35 @@ The model is built using **Keras Sequential API** with the following layers:
 - **YOLOv11 based Classifier Accuracy**: 94%
 - The models successfully distinguish between all five animal classes.
 
+### 📈 Training & Validation Curves
+![Training Curves](results/training_curves.png)
+
+### 🎯 Confusion Matrix
+![Confusion Matrix](results/confusion_matrix.png)
+
 ---
 
 ## 🧪 Testing & Prediction
-The trained models can predict the class of a **new unseen image** and output the **predicted animal label**.
+The trained models can predict the class of a **new unseen image** and output the **predicted animal label** with confidence metrics.
+
+### 1. One-Click Pipeline Demo
+Run the verification demo script to test preprocessing and inference:
+```bash
+python scripts/demo.py
+```
+![Demo Prediction Output](results/demo_prediction.png)
+
+### 2. Interactive Web Application (Streamlit)
+Launch the interactive web UI to test and classify your own animal photos:
+```bash
+streamlit run app.py
+```
+
+### 3. Command-Line Inference
+Run inference directly on a specific image file:
+```bash
+python src/predict.py --image path/to/image.jpg
+```
 
 ---
 

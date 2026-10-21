@@ -78,6 +78,29 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 - Accepts an arbitrary test image path via `--image <path>`.
 - Preprocesses input, executes model forward pass, and prints predicted label alongside ranked confidence percentages for all 5 animal classes.
 
+### Milestone 7 (October 20): Pull Request Merge, Automated Unit Testing & Visual Analytics
+- **PR #1 Merged into `main`**: Submitted formal Pull Request `#1` from `Samiun-Mahmud` to `main`. Successfully resolved merge conflicts on `README.md` and merged all core CNN code into the project's primary branch (`17fe466`).
+- **Automated Unit Testing (`tests/test_model.py`)**:
+  - Implemented unit test suite using `unittest` to guarantee architecture validity and numerical stability.
+  - Verified input tensor constraints `(None, 256, 256, 3)` and output tensor constraints `(None, 5)`.
+  - Added assertion testing to ensure Softmax activation generates valid probability distributions strictly summing to 1.0.
+  - Confirmed 3-block convolutional layering and dense classification head without dimension mismatches.
+- **Visual Analytics Generation (`results/`)**:
+  - Generated high-resolution confusion matrix heatmap (`results/confusion_matrix.png`) illustrating 100% test classification accuracy across Cat, Cow, Dog, Lamb, and Zebra.
+  - Generated 20-epoch training and validation loss and accuracy progression curves (`results/training_curves.png`).
+  - Embedded visual analytics into both `README.md` and `CONTRIBUTIONS_SAMIUN.md`.
+
+### Milestone 8 (October 21): Web UI Deployment, Data Augmentation & Demo Runner
+- **Interactive Streamlit Web Application (`app.py`)**:
+  - Engineered an interactive web application allowing users to drag-and-drop animal images and view instant classifications.
+  - Formulated real-time probability visualization bars with emoji badges for all 5 animal classes (Cat, Cow, Dog, Lamb, Zebra).
+  - Integrated graceful fallback handling for quick local testing and evaluation presentations.
+- **Data Augmentation Pipeline Formulation (`src/augment.py`)**:
+  - Implemented `build_augmentation_pipeline()` applying `RandomFlip("horizontal")`, `RandomRotation(0.1)`, `RandomZoom(0.1)`, and `RandomContrast(0.1)` to combat potential overfitting and increase model robustness against noisy, unstandardized user photos.
+  - Linked augmentation layer to the `src` package API.
+- **One-Click End-to-End Pipeline Demo (`scripts/demo.py`)**:
+  - Developed standalone demo script verifying preprocessing, inference formatting, and producing visual prediction reports saved directly to `results/demo_prediction.png`.
+
 ---
 
 ## 📊 Experimental Results (CNN Classifier)
@@ -91,6 +114,14 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 | **Recall (All 5 classes)** | **1.00** | Zero misclassifications |
 | **F1-Score (All 5 classes)** | **1.00** | Harmonic mean of precision & recall |
 
+### Performance Visualizations
+<p align="center">
+  <img src="results/training_curves.png" alt="Training & Validation Curves" width="70%" />
+</p>
+<p align="center">
+  <img src="results/confusion_matrix.png" alt="Confusion Matrix Heatmap" width="50%" />
+</p>
+
 ---
 
 ## 📂 Files Authored by Samiun Mahmud
@@ -98,15 +129,28 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 ```
 Animal-Image-Classifier-/
 ├── .gitignore                    # Project ignore rules
+├── app.py                        # Streamlit interactive web application
 ├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log
 ├── Dataset Drive Link            # Cloud dataset reference link
+├── README.md                     # Project documentation & visual results
+├── requirements.txt              # Dependency specifications
 ├── main/
 │   └── cnncl.ipynb               # Baseline CNN exploration notebook
-└── src/
-    ├── __init__.py               # Package initializer
-    ├── model.py                  # CNN Sequential architecture definition
-    ├── data_loader.py            # Dataset loading, scaling, and splitting
-    ├── train.py                  # CLI training script with callbacks
-    ├── evaluate.py               # Test evaluation and confusion matrix
-    └── predict.py                # Single image inference CLI
+├── results/
+│   ├── confusion_matrix.png      # 100% test accuracy heatmap
+│   ├── demo_prediction.png       # Inference pipeline verification report
+│   └── training_curves.png       # 20-epoch loss and accuracy plots
+├── scripts/
+│   └── demo.py                   # One-click standalone demo runner
+├── src/
+│   ├── __init__.py               # Package initializer
+│   ├── augment.py                # Data augmentation pipeline (flips, rotations, zooms)
+│   ├── model.py                  # CNN Sequential architecture definition
+│   ├── data_loader.py            # Dataset loading, scaling, and splitting
+│   ├── train.py                  # CLI training script with callbacks
+│   ├── evaluate.py               # Test evaluation and confusion matrix
+│   └── predict.py                # Single image inference CLI
+└── tests/
+    ├── __init__.py               # Test package initializer
+    └── test_model.py             # Automated unit tests for CNN architecture
 ```
