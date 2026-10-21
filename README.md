@@ -1,6 +1,15 @@
 # CSE445-Machine Learning-Project: Animal-Image-Classifier
 # 🐾 Multiclass Animal Image Classification using CNN and YOLOv11
 
+[![CNN Model CI Pipeline](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml/badge.svg)](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml)
+[![Accuracy](https://img.shields.io/badge/CNN%20Accuracy-100%25-brightgreen)](results/confusion_matrix.png)
+[![Framework](https://img.shields.io/badge/Framework-TensorFlow%20%2F%20Keras-orange)](requirements.txt)
+[![Interactive App](https://img.shields.io/badge/Web%20App-Streamlit-red)](app.py)
+
+> 📘 **Documentation & Defense Links**:
+> - [🎓 Faculty Defense & Viva Guide](FACULTY_DEFENSE_GUIDE.md) — Two-minute pitch, parameter math & top 10 viva questions
+> - [👨‍💻 Samiun Mahmud Contribution Log](CONTRIBUTIONS_SAMIUN.md) — Daily development milestones & technical rationale
+
 ## 📌 Project Overview
 This is our academic machine learning project for **CSE445**. It focuses on building a **custom image classification system** using a **Convolutional Neural Network (CNN) with a Sequential architecture** and **YOLOv11**.  
 The model classifies images into **five animal classes**: **Dog, Cow, Cat, Lamb, and Zebra**.

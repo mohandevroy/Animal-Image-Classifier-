@@ -101,6 +101,16 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 - **One-Click End-to-End Pipeline Demo (`scripts/demo.py`)**:
   - Developed standalone demo script verifying preprocessing, inference formatting, and producing visual prediction reports saved directly to `results/demo_prediction.png`.
 
+### Milestone 9 (October 22): Pull Request Merge, CI/CD Pipeline & Faculty Defense Dossier
+- **PR #2 Merged into `main` (`637e6e1`)**: Successfully merged all October 20 & 21 deliverables into the project's primary branch.
+- **GitHub Actions CI/CD Pipeline (`.github/workflows/ci.yml`)**:
+  - Configured automated test runner executing on Ubuntu with Python 3.11.
+  - Automatically installs dependencies, executes unit tests, and verifies the end-to-end pipeline on every push and pull request.
+- **Packaged Test Examples (`examples/`)**:
+  - Added ready-to-test sample images (`cat_test.jpg`, `cow_test.jpg`, `dog_test.jpg`, `lamb_test.jpg`, `zebra_test.jpg`) enabling instant verification without external dataset downloads.
+- **Faculty Defense & Viva Dossier (`FACULTY_DEFENSE_GUIDE.md`)**:
+  - Authored a comprehensive faculty viva guide detailing 2-minute elevator pitch, mathematical parameter calculations, live CLI demo instructions, and top 10 faculty viva questions with complete answers.
+
 ---
 
 ## 📊 Experimental Results (CNN Classifier)
@@ -128,12 +138,22 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 
 ```
 Animal-Image-Classifier-/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                # Automated GitHub Actions CI test runner
 ├── .gitignore                    # Project ignore rules
 ├── app.py                        # Streamlit interactive web application
 ├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log
 ├── Dataset Drive Link            # Cloud dataset reference link
+├── FACULTY_DEFENSE_GUIDE.md      # Viva presentation guide & parameter math
 ├── README.md                     # Project documentation & visual results
 ├── requirements.txt              # Dependency specifications
+├── examples/                     # Standalone sample test images for all 5 classes
+│   ├── cat_test.jpg
+│   ├── cow_test.jpg
+│   ├── dog_test.jpg
+│   ├── lamb_test.jpg
+│   └── zebra_test.jpg
 ├── main/
 │   └── cnncl.ipynb               # Baseline CNN exploration notebook
 ├── results/
