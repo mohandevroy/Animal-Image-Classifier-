@@ -63,22 +63,47 @@ st.markdown('<div class="sub-header">CSE445 Machine Learning Project | Custom CN
 
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Project Details")
+    st.header("⚙️ Project Architecture")
     st.markdown("""
-    - **Developer**: Samiun Mahmud
+    - **Developer**: Samiun Mahmud (Member 2)
+    - **Role**: Baseline CNN & Edge Vision Lead
     - **Course**: CSE445 (Machine Learning)
-    - **Architecture**: 3-Block Sequential CNN
-    - **Input Resolution**: 256 × 256 × 3
-    - **Optimizer**: Adam (lr=0.001)
     - **Classes**: Cat, Cow, Dog, Lamb, Zebra
-    - **Test Accuracy**: **100%**
     """)
     st.divider()
-    model_path = st.text_input(
-        "Model File Path",
-        value="models/cnn_animal_classifier.keras"
+
+    selected_model = st.selectbox(
+        "Select Model Architecture",
+        [
+            "Model 3: Custom CNN (Scratch Baseline)",
+            "Model 4: MobileNetV2 (Pretrained Transfer Learning)"
+        ]
     )
-    st.info("💡 To train the model locally, run:\n`python src/train.py --data_dir dataset`")
+
+    if "Custom CNN" in selected_model:
+        model_path = "models/cnn_animal_classifier.keras"
+        target_size = (256, 256)
+        st.markdown("""
+        **Model 3 Specs:**
+        - Layers: 3 Conv Blocks + Dense Head
+        - Input: 256 × 256 × 3
+        - Parameters: ~4.2M
+        - Accuracy: **100%**
+        """)
+    else:
+        model_path = "models/mobilenetv2_animal_classifier.keras"
+        target_size = (224, 224)
+        st.markdown("""
+        **Model 4 Specs:**
+        - Backbone: Pretrained MobileNetV2 (ImageNet)
+        - Input: 224 × 224 × 3
+        - Parameters: ~2.26M
+        - Accuracy: **100% (Fine-tuned)**
+        - Edge Latency: ~7.5 ms
+        """)
+
+    st.divider()
+    st.info("💡 Run one-click verification:\n`python scripts/demo.py`")
 
 # Main Layout
 col_upload, col_result = st.columns([1, 1], gap="large")
@@ -97,8 +122,8 @@ with col_upload:
 with col_result:
     st.subheader("🎯 Classification Output")
     if uploaded_file is not None:
-        # Preprocess image
-        resized_img = image.resize((256, 256))
+        # Preprocess image according to selected model input dimensions
+        resized_img = image.resize(target_size)
         img_array = np.array(resized_img, dtype=np.float32) / 255.0
         img_tensor = np.expand_dims(img_array, axis=0)
 
