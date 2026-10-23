@@ -1,5 +1,5 @@
 # CSE445 — Multiclass Animal Image Classifier
-## 🐾 Week 1: Custom CNN Baseline (Model 3)
+## 🐾 Week 1: Custom CNN Baseline 
 
 [![CI Pipeline](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml/badge.svg)](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml)
 [![Accuracy](https://img.shields.io/badge/CNN%20Test%20Accuracy-100%25-brightgreen)](#-results)
