@@ -2,18 +2,22 @@
 
 - **Student Name**: Samiun Mahmud
 - **Course**: CSE445 — Machine Learning
-- **Project**: Multiclass Animal Image Classification using CNN and YOLOv11
-- **Assigned Module**: **Part 2 — CNN Sequential Classifier & Production Engineering**
-- **Branch**: `Samiun-Mahmud`
+- **Project**: Multiclass Animal Image Classification (8-Model Benchmark)
+- **Assigned Role**: **Member 2 — Baseline CNN & Edge Vision Lead**
+- **Assigned Models**:
+  - **Model 3**: Custom CNN (Trained from scratch baseline with Spatial Dropout & L2 decay)
+  - **Model 4**: MobileNetV2 (Pretrained ImageNet transfer learning with fine-tuning)
+- **Branch**: `Samiun-Mahmud` (or `feat/cnn-and-mobilenet`)
 - **Repository**: [mohandevroy/Animal-Image-Classifier-](https://github.com/mohandevroy/Animal-Image-Classifier-)
 
 ---
 
 ## 🎯 1. Two-Minute Elevator Pitch (Say This to Your Faculty)
-> *"Good morning/afternoon, Sir. In our group project, I was responsible for **Part 2: The CNN Sequential Classifier** on branch **`Samiun-Mahmud`**.*  
-> *My focus was to design, train, evaluate, and modularize an end-to-end deep learning system that classifies animal images into 5 categories: **Cat, Cow, Dog, Lamb, and Zebra**.*  
-> *Rather than stopping at an exploratory notebook, I engineered a production-grade Python package with data augmentation, automated unit tests, visual analytics, a one-click CLI demo, and an interactive Streamlit web application.*  
-> *Our CNN model achieved **100% test accuracy** with zero classification errors across all 50 hold-out test images, outperforming YOLOv11's 94% on this classification task."*
+> *"Good morning/afternoon, Sir. In our group project's 8-model architecture, I served as **Member 2: Baseline CNN & Edge Vision Lead** on branch **`Samiun-Mahmud`**.*  
+> *I was responsible for two complementary models across the machine learning spectrum:*  
+> *1. **Model 3 (Custom CNN)**: Engineered from scratch with a 3-block convolutional hierarchy, Spatial Dropout (0.3), and L2 weight decay ($1\times 10^{-4}$) to prevent overfitting on 100 images per class, reaching 100% test accuracy.*  
+> *2. **Model 4 (MobileNetV2)**: Implemented an edge-optimized transfer learning pipeline utilizing ImageNet pretrained weights. I executed a two-stage training schedule: freezing the 154-layer backbone for feature extraction, followed by unfreezing the top inverted residual blocks with a $10\times$ lower learning rate ($1\times 10^{-5}$) for fine-tuning.*  
+> *In our benchmark comparison, MobileNetV2 reduced parameter count by **46%** (2.26M vs 4.21M) and inference latency to just **7.5 ms** while maintaining 100% accuracy. Both models are fully integrated into our interactive Streamlit web app."*
 
 ---
 

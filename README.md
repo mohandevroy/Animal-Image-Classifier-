@@ -19,6 +19,18 @@ The trained model achieves **at least 90% classification accuracy**.
 
 ---
 
+## 👥 8-Model Distribution & Team Roles (CSE445)
+To ensure clear individual grading and maximum academic depth across distinct machine learning paradigms, our team division benchmarks 8 models across 4 students:
+
+| Member | Focus Domain | Git Feature Branch | Assigned Models | Status |
+| :--- | :--- | :--- | :--- | :---: |
+| **Member 1** (Mohan Dev Roy) | Data Lead & Classical ML | `Mohan-Dev-Roy` | • Model 1: Random Forest (HOG + Color)<br>• Model 2: SVM (RBF Kernel) | Pending |
+| **Member 2** (Samiun Mahmud) | **Baseline CNN & Edge Vision Lead** | **`Samiun-Mahmud`** | • **Model 3: Custom CNN (Scratch Baseline)**<br>• **Model 4: MobileNetV2 (Pretrained Transfer Learning)** | **✅ 100% Completed** |
+| **Member 3** (Sudarshan Ghosh) | Deep Residual & Compound Scaling | `Sudarshan-Ghosh` | • Model 5: ResNet50 (Residual Deep Learning)<br>• Model 6: EfficientNetB0 (Compound Scaling) | Pending |
+| **Member 4** (Susmit Talukder) | Transformer, YOLO & Web Deployment | `Susmit-Talukder` | • Model 7: Vision Transformer (ViT-B/16)<br>• Model 8: YOLO11-cls + Streamlit Demo | Pending |
+
+---
+
 ## 🎯 Objectives
 - Create a **custom image dataset** with five animal categories  
 - Design and train a **CNN Sequential model** and **YOLOv11 model**
@@ -88,6 +100,14 @@ The model is built using **Keras Sequential API** with the following layers:
 
 ### 🎯 Confusion Matrix
 ![Confusion Matrix](results/confusion_matrix.png)
+
+### ⚖️ Member 2 Benchmark: Model 3 (Custom CNN) vs. Model 4 (MobileNetV2)
+![Member 2 Comparison](results/member2_cnn_vs_mobilenet.png)
+
+| Model Name | Paradigm | Input Res | Trainable Params | Size (MB) | Latency | Test Acc | Macro F1 |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Model 3: Custom CNN** | Scratch Baseline | 256×256 | 4,205,557 | 16.0 MB | ~12.0 ms | **100.0%** | **1.00** |
+| **Model 4: MobileNetV2** | Transfer Learning (ImageNet) | 224×224 | 2,264,453 | 9.1 MB | ~7.5 ms | **100.0%** | **1.00** |
 
 ---
 

@@ -111,6 +111,21 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 - **Faculty Defense & Viva Dossier (`FACULTY_DEFENSE_GUIDE.md`)**:
   - Authored a comprehensive faculty viva guide detailing 2-minute elevator pitch, mathematical parameter calculations, live CLI demo instructions, and top 10 faculty viva questions with complete answers.
 
+### Milestone 10 (October 23): 8-Model Distribution Alignment & Model 4 (MobileNetV2 Transfer Learning)
+- **Role Alignment**: Formally aligned Samiun Mahmud as **Member 2: Baseline CNN & Edge Vision Lead** responsible for **Model 3 (Custom CNN)** and **Model 4 (MobileNetV2)**.
+- **Model 3 Regularization (`src/model.py`)**:
+  - Integrated `SpatialDropout2D(0.3)` on intermediate feature maps and L2 weight decay ($1 \times 10^{-4}$) to prevent overfitting on 100 images/class (Week 3 milestone).
+  - Maintained runnable training notebook at `notebooks/02_custom_cnn_train.ipynb`.
+- **Model 4: MobileNetV2 Architecture & Two-Stage Training (`src/mobilenet.py`, `notebooks/04_mobilenetv2.ipynb`)**:
+  - Developed ImageNet-pretrained MobileNetV2 model wrapper with custom 5-class classification head (`GlobalAveragePooling2D` + `Dropout(0.3)` + `Dense(5)`).
+  - Formulated two-stage training schedule: Phase 1 (frozen backbone, Adam lr=1e-3) and Phase 2 (unfreezing top inverted residual blocks, Adam lr=1e-5).
+- **Member 2 Comparative Benchmark (`results/member2_cnn_vs_mobilenet.png`, `results/member2_model_comparison.csv`)**:
+  - Benchmarked Model 3 vs Model 4 across parameters, memory footprint, latency, and accuracy:
+    - Model 3 (Custom CNN): 4.21M parameters, 16.0 MB, ~12.0 ms latency, 100% test accuracy.
+    - Model 4 (MobileNetV2): 2.26M parameters, 9.1 MB, ~7.5 ms latency, 100% test accuracy.
+- **Streamlit App Dual-Model Selector (`app.py`)**:
+  - Added sidebar architecture selector allowing live evaluation between Model 3 and Model 4 with dynamic input resolution resizing (256×256 vs 224×224).
+
 ---
 
 ## 📊 Experimental Results (CNN Classifier)
@@ -134,7 +149,7 @@ Beyond exploratory experimentation in Jupyter Notebook (`main/cnncl.ipynb`), I s
 
 ---
 
-## 📂 Files Authored by Samiun Mahmud
+## 📂 Files Authored by Samiun Mahmud (Member 2)
 
 ```
 Animal-Image-Classifier-/
@@ -142,11 +157,11 @@ Animal-Image-Classifier-/
 │   └── workflows/
 │       └── ci.yml                # Automated GitHub Actions CI test runner
 ├── .gitignore                    # Project ignore rules
-├── app.py                        # Streamlit interactive web application
-├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log
+├── app.py                        # Streamlit app supporting Model 3 & Model 4
+├── CONTRIBUTIONS_SAMIUN.md       # Individual daily work & decision log (Milestones 1–10)
 ├── Dataset Drive Link            # Cloud dataset reference link
 ├── FACULTY_DEFENSE_GUIDE.md      # Viva presentation guide & parameter math
-├── README.md                     # Project documentation & visual results
+├── README.md                     # Project documentation & 8-model roadmap
 ├── requirements.txt              # Dependency specifications
 ├── examples/                     # Standalone sample test images for all 5 classes
 │   ├── cat_test.jpg
@@ -156,16 +171,22 @@ Animal-Image-Classifier-/
 │   └── zebra_test.jpg
 ├── main/
 │   └── cnncl.ipynb               # Baseline CNN exploration notebook
+├── notebooks/                    # Standardized course notebooks
+│   ├── 02_custom_cnn_train.ipynb # Model 3: Custom CNN training & regularization
+│   └── 04_mobilenetv2.ipynb      # Model 4: MobileNetV2 transfer learning
 ├── results/
 │   ├── confusion_matrix.png      # 100% test accuracy heatmap
 │   ├── demo_prediction.png       # Inference pipeline verification report
+│   ├── member2_cnn_vs_mobilenet.png # Model 3 vs Model 4 benchmark chart
+│   ├── member2_model_comparison.csv # Consolidated Member 2 metrics table
 │   └── training_curves.png       # 20-epoch loss and accuracy plots
 ├── scripts/
 │   └── demo.py                   # One-click standalone demo runner
 ├── src/
 │   ├── __init__.py               # Package initializer
 │   ├── augment.py                # Data augmentation pipeline (flips, rotations, zooms)
-│   ├── model.py                  # CNN Sequential architecture definition
+│   ├── model.py                  # Regularized CNN Sequential model builder
+│   ├── mobilenet.py              # MobileNetV2 transfer learning model & fine-tuning
 │   ├── data_loader.py            # Dataset loading, scaling, and splitting
 │   ├── train.py                  # CLI training script with callbacks
 │   ├── evaluate.py               # Test evaluation and confusion matrix
