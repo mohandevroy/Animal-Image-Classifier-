@@ -1,99 +1,116 @@
-# CSE445-Machine Learning-Project: Animal-Image-Classifier
-# 🐾 Multiclass Animal Image Classification using CNN and YOLOv11
+# CSE445 — Multiclass Animal Image Classifier
+## 🐾 Week 1: Custom CNN Baseline (Model 3)
 
-[![CNN Model CI Pipeline](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml/badge.svg)](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml)
-[![Accuracy](https://img.shields.io/badge/CNN%20Accuracy-100%25-brightgreen)](results/confusion_matrix.png)
+[![CI Pipeline](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml/badge.svg)](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml)
+[![Accuracy](https://img.shields.io/badge/CNN%20Test%20Accuracy-100%25-brightgreen)](#-results)
 [![Framework](https://img.shields.io/badge/Framework-TensorFlow%20%2F%20Keras-orange)](requirements.txt)
-[![Interactive App](https://img.shields.io/badge/Web%20App-Streamlit-red)](app.py)
+[![Member](https://img.shields.io/badge/Member%202-Samiun%20Mahmud-blue)](CONTRIBUTIONS_SAMIUN.md)
 
-> 📘 **Documentation & Defense Links**:
-> - [🎓 Faculty Defense & Viva Guide](FACULTY_DEFENSE_GUIDE.md) — Two-minute pitch, parameter math & top 10 viva questions
-> - [👨‍💻 Samiun Mahmud Contribution Log](CONTRIBUTIONS_SAMIUN.md) — Daily development milestones & technical rationale
-
-## 📌 Project Overview
-This is our academic machine learning project for **CSE445**. It focuses on building a **custom image classification system** using a **Convolutional Neural Network (CNN) with a Sequential architecture** and **YOLOv11**.  
-The model classifies images into **five animal classes**: **Dog, Cow, Cat, Lamb, and Zebra**.
-
-A custom dataset was created with **100 images per class**, collected from the internet and real-world captures.  
-The trained model achieves **at least 90% classification accuracy**.
+> **Branch:** `Samiun-Mahmud` | **Role:** Member 2 — Baseline CNN & Edge Vision Lead  
+> **Week 1 Focus:** Build and verify Model 3 (Custom CNN trained from scratch) across 5 animal classes.
 
 ---
 
-## 👥 8-Model Distribution & Team Roles (CSE445)
-To ensure clear individual grading and maximum academic depth across distinct machine learning paradigms, our team division benchmarks 8 models across 4 students:
+## 👥 Team & 8-Model Project Overview
 
-| Member | Focus Domain | Git Feature Branch | Assigned Models | Status |
-| :--- | :--- | :--- | :--- | :---: |
-| **Member 1** (Mohan Dev Roy) | Data Lead & Classical ML | `Mohan-Dev-Roy` | • Model 1: Random Forest (HOG + Color)<br>• Model 2: SVM (RBF Kernel) | Pending |
-| **Member 2** (Samiun Mahmud) | **Baseline CNN & Edge Vision Lead** | **`Samiun-Mahmud`** | • **Model 3: Custom CNN (Scratch Baseline)**<br>• **Model 4: MobileNetV2 (Pretrained Transfer Learning)** | **✅ 100% Completed** |
-| **Member 3** (Sudarshan Ghosh) | Deep Residual & Compound Scaling | `Sudarshan-Ghosh` | • Model 5: ResNet50 (Residual Deep Learning)<br>• Model 6: EfficientNetB0 (Compound Scaling) | Pending |
-| **Member 4** (Susmit Talukder) | Transformer, YOLO & Web Deployment | `Susmit-Talukder` | • Model 7: Vision Transformer (ViT-B/16)<br>• Model 8: YOLO11-cls + Streamlit Demo | Pending |
+| Member | Role | Branch | Week 1 Assigned Model |
+| :--- | :--- | :--- | :--- |
+| Mohan Dev Roy | Data Lead & Classical ML | `Mohan-Dev-Roy` | Model 1: Random Forest (HOG + Color) |
+| **Samiun Mahmud** | **Baseline CNN & Edge Vision** | **`Samiun-Mahmud`** | **Model 3: Custom CNN (Scratch Baseline)** ✅ |
+| Sudarshan Ghosh | Deep Residual & Scaled Vision | `Sudarshan-Ghosh` | Model 5: ResNet50 Transfer Learning |
+| Susmit Talukder | Transformers, YOLO & Web App | `Susmit-Talukder` | Model 8: YOLO11-cls |
 
 ---
 
-## 🎯 Objectives
-- Create a **custom image dataset** with five animal categories  
-- Design and train a **CNN Sequential model** and **YOLOv11 model**
-- Achieve **≥ 90% accuracy**
-- Evaluate model performance using validation and test data
+## 📌 Week 1 Deliverables (Member 2)
+
+Per the milestone plan, **Week 1** requires:
+> *Member 2: Builds and verifies the 4-layer Model 3 (Custom CNN) from scratch; runs 20 baseline epochs.*
+
+| Deliverable | File | Status |
+| :--- | :--- | :---: |
+| Dataset loading & 70/20/10 split pipeline | `src/data_loader.py` | ✅ Done |
+| Data augmentation pipeline | `src/augment.py` | ✅ Done |
+| Custom CNN model architecture | `src/model.py` | ✅ Done |
+| Training script with callbacks | `src/train.py` | ✅ Done |
+| Evaluation & confusion matrix script | `src/evaluate.py` | ✅ Done |
+| Single-image inference CLI | `src/predict.py` | ✅ Done |
+| Baseline training notebook (20 epochs) | `notebooks/02_custom_cnn_train.ipynb` | ✅ Done |
+| Unit tests for architecture | `tests/test_model.py` | ✅ Done |
+| Training curves & confusion matrix | `results/` | ✅ Done |
+| GitHub Actions CI pipeline | `.github/workflows/ci.yml` | ✅ Done |
 
 ---
 
 ## 🗂 Dataset Details
-- **Classes**:
-  - Dog
-  - Cow
-  - Cat
-  - Lamb
-  - Zebra
-- **Images per class**: 100  
+
+- **Classes**: Dog, Cow, Cat, Lamb, Zebra
+- **Images per class**: 100
 - **Total images**: 500
 - **Image source**: Internet + mobile phone camera
-- **Image size**: Resized to a fixed resolution before training
 - **Dataset Link**: [Google Drive Dataset Folder](https://drive.google.com/drive/folders/1SdRlRL4PUU4nPxfkYQYQNeQKAIEO4JkF?usp=sharing)
 
 ### Dataset Structure
 ```
 dataset/
-├── dog/
-├── cow/
 ├── cat/
+├── cow/
+├── dog/
 ├── lamb/
 └── zebra/
 ```
 
 ---
 
-## 🧠 Model Architecture of CNN
-The model is built using **Keras Sequential API** with the following layers:
+## 🧠 Model 3: Custom CNN Architecture
 
-- Convolutional layers for feature extraction
-- MaxPooling layers for dimensionality reduction
-- Fully connected (Dense) layers for classification
-- Softmax activation for multi-class prediction
+Built using **Keras Sequential API** — a 3-block convolutional feature extractor trained entirely from scratch.
 
-### Why CNN Sequential?
-- Simple and easy to understand
-- Effective for image classification tasks
-- Suitable for small-to-medium datasets
+### Network Design
+
+| Block | Layer | Filters | Output Shape | Purpose |
+| :--- | :--- | :---: | :---: | :--- |
+| **Block 1** | `Conv2D` | 16 | `(256, 256, 16)` | Low-level edges & gradients |
+| | `MaxPooling2D(2×2)` | — | `(128, 128, 16)` | Spatial downsampling |
+| **Block 2** | `Conv2D` | 32 | `(128, 128, 32)` | Intermediate textures & motifs |
+| | `SpatialDropout2D(0.3)` | — | `(128, 128, 32)` | Regularization on feature maps |
+| | `MaxPooling2D(2×2)` | — | `(64, 64, 32)` | Spatial downsampling |
+| **Block 3** | `Conv2D` | 16 | `(64, 64, 16)` | Higher-level structural features |
+| | `MaxPooling2D(2×2)` | — | `(32, 32, 16)` | Final downsampling |
+| **Head** | `Flatten` | — | `(16384)` | Vectorize feature maps |
+| | `Dense(256, ReLU)` | — | `(256)` | Non-linear combination |
+| | `Dropout(0.3)` | — | `(256)` | Prevent overfitting |
+| | `Dense(5, Softmax)` | — | `(5)` | Output class probabilities |
+
+**Total parameters: ~4,205,557 (~16 MB)**
 
 ---
 
 ## ⚙️ Training Configuration
-- **Framework**: TensorFlow / Keras
-- **Model Type**: CNN (Sequential)
-- **Optimizer**: Adam
-- **Loss Function**: Categorical Crossentropy
-- **Epochs**: 20
-- **Batch Size**: 32
-- **Image Size**: 256 × 256
+
+| Hyperparameter | Value |
+| :--- | :--- |
+| Framework | TensorFlow / Keras |
+| Optimizer | Adam (lr = 0.001) |
+| Loss Function | `sparse_categorical_crossentropy` |
+| Regularization | SpatialDropout2D (0.3) + L2 weight decay (1e-4) |
+| Epochs | 20 |
+| Batch Size | 32 |
+| Input Resolution | 256 × 256 × 3 |
+| Data Split | 70% Train / 20% Validation / 10% Test |
 
 ---
 
-## 📊 Results
-- **CNN based Classifier Accuracy**: 100%
-- **YOLOv11 based Classifier Accuracy**: 94%
-- The models successfully distinguish between all five animal classes.
+## 📊 Week 1 Results
+
+| Metric | Score |
+| :--- | :---: |
+| Training Accuracy | **100%** |
+| Validation Accuracy | **100%** |
+| Test Accuracy | **100%** |
+| Precision (all 5 classes) | **1.00** |
+| Recall (all 5 classes) | **1.00** |
+| F1-Score (all 5 classes) | **1.00** |
 
 ### 📈 Training & Validation Curves
 ![Training Curves](results/training_curves.png)
@@ -101,48 +118,87 @@ The model is built using **Keras Sequential API** with the following layers:
 ### 🎯 Confusion Matrix
 ![Confusion Matrix](results/confusion_matrix.png)
 
-### ⚖️ Member 2 Benchmark: Model 3 (Custom CNN) vs. Model 4 (MobileNetV2)
-![Member 2 Comparison](results/member2_cnn_vs_mobilenet.png)
-
-| Model Name | Paradigm | Input Res | Trainable Params | Size (MB) | Latency | Test Acc | Macro F1 |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Model 3: Custom CNN** | Scratch Baseline | 256×256 | 4,205,557 | 16.0 MB | ~12.0 ms | **100.0%** | **1.00** |
-| **Model 4: MobileNetV2** | Transfer Learning (ImageNet) | 224×224 | 2,264,453 | 9.1 MB | ~7.5 ms | **100.0%** | **1.00** |
-
 ---
 
-## 🧪 Testing & Prediction
-The trained models can predict the class of a **new unseen image** and output the **predicted animal label** with confidence metrics.
+## 🚀 How to Run
 
-### 1. One-Click Pipeline Demo
-Run the verification demo script to test preprocessing and inference:
+### Install dependencies
 ```bash
-python scripts/demo.py
-```
-![Demo Prediction Output](results/demo_prediction.png)
-
-### 2. Interactive Web Application (Streamlit)
-Launch the interactive web UI to test and classify your own animal photos:
-```bash
-streamlit run app.py
+pip install -r requirements.txt
 ```
 
-### 3. Command-Line Inference
-Run inference directly on a specific image file:
+### Train the model
 ```bash
-python src/predict.py --image path/to/image.jpg
+python src/train.py --data_dir dataset --epochs 20
+```
+
+### Evaluate on test set
+```bash
+python src/evaluate.py --model models/cnn_animal_classifier.keras --data_dir dataset
+```
+
+### Predict a single image
+```bash
+python src/predict.py --image examples/dog_test.jpg
+```
+
+### Run automated tests
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
 ---
 
 ## 📦 Requirements
-- Python 3.x
-- TensorFlow
-- Keras
-- NumPy
-- Matplotlib
 
-Install dependencies:
 ```bash
 pip install -r requirements.txt
+```
+
+| Package | Version | Purpose |
+| :--- | :--- | :--- |
+| tensorflow | >=2.15.0 | Deep learning framework |
+| numpy | >=1.24.0 | Numerical computation |
+| matplotlib | >=3.8.0 | Visualization |
+| scikit-learn | >=1.3.0 | Confusion matrix, classification report |
+| pillow | >=10.0.0 | Image loading |
+
+---
+
+## 📂 Repository Structure (Week 1)
+
+```
+Animal-Image-Classifier-/
+├── .github/
+│   └── workflows/
+│       └── ci.yml                # Automated CI test runner (Ubuntu + Python 3.11)
+├── .gitignore                    # Excludes caches, binaries, and datasets
+├── CONTRIBUTIONS_SAMIUN.md       # Daily engineering log
+├── Dataset Drive Link            # Google Drive link to 500-image dataset
+├── README.md                     # Project documentation (this file)
+├── requirements.txt              # All Python dependencies
+├── examples/                     # Sample test images (one per class)
+│   ├── cat_test.jpg
+│   ├── cow_test.jpg
+│   ├── dog_test.jpg
+│   ├── lamb_test.jpg
+│   └── zebra_test.jpg
+├── main/
+│   └── cnncl.ipynb               # Original Google Colab baseline notebook
+├── notebooks/
+│   └── 02_custom_cnn_train.ipynb # Structured training notebook (Week 1)
+├── results/
+│   ├── confusion_matrix.png      # Confusion matrix heatmap
+│   └── training_curves.png       # 20-epoch loss & accuracy curves
+├── src/
+│   ├── __init__.py               # Package initializer
+│   ├── model.py                  # Custom CNN architecture
+│   ├── data_loader.py            # Dataset loading & 70/20/10 split
+│   ├── augment.py                # Data augmentation pipeline
+│   ├── train.py                  # CLI training script with callbacks
+│   ├── evaluate.py               # Test evaluation & confusion matrix
+│   └── predict.py                # Single-image inference CLI
+└── tests/
+    ├── __init__.py
+    └── test_model.py             # Automated unit tests for CNN architecture
 ```
