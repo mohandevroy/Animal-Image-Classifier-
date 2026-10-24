@@ -9,9 +9,6 @@ This is our Academic project
 **Validation Images:** 100  
 **Test Images:** 50  
 
-### Training & Validation Curves
-
-![YOLO11n-cls Training Results](results/yolo11n-cls/results.png)
 
 ### Validation Performance
 
@@ -23,5 +20,3 @@ This is our Academic project
 - Correct Predictions: 47/50
 - Number of Classes: 5
 - Image Size: 256 × 256
-
-*Note: Validation metrics are reported from the training notebook. Test-set performance should be reported separately after evaluating the model on the test set.*
