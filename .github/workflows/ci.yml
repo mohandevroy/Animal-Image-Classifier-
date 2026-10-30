@@ -29,6 +29,7 @@ jobs:
       run: |
         echo "Checking required files exist..."
         test -f src/model.py       && echo "✓ src/model.py"
+        test -f src/mobilenet.py   && echo "✓ src/mobilenet.py"
         test -f src/data_loader.py && echo "✓ src/data_loader.py"
         test -f src/train.py       && echo "✓ src/train.py"
         test -f src/evaluate.py    && echo "✓ src/evaluate.py"
