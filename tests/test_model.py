@@ -1,7 +1,7 @@
 """
 Automated Unit Tests for CNN Animal Image Classifier Architecture
 Author: Samiun Mahmud
-Week 2: Extended to include MobileNetV2 structural checks
+Week 2: Extended to include MobileNetV2 structural checks and data loader configs
 """
 
 import sys
@@ -146,6 +146,32 @@ class TestMobileNetV2Architecture(unittest.TestCase):
         """Verify MobileNetV2 expects 224x224 input for pretrained weights."""
         expected_shape = (None, 224, 224, 3)
         self.assertEqual(self.model.input_shape, expected_shape)
+
+
+class TestDataLoaderConfiguration(unittest.TestCase):
+    """
+    Test suite verifying image resolution routing and class labels.
+    Runs without requiring TensorFlow.
+    """
+
+    def setUp(self):
+        from data_loader import get_default_image_size, CLASS_NAMES
+        self.get_default_image_size = get_default_image_size
+        self.class_names = CLASS_NAMES
+
+    def test_cnn_default_resolution(self):
+        """Custom CNN (Model 3) should use 256x256 resolution."""
+        self.assertEqual(self.get_default_image_size('cnn'), (256, 256))
+
+    def test_mobilenet_default_resolution(self):
+        """MobileNetV2 (Model 4) should use 224x224 resolution for pretrained weights."""
+        self.assertEqual(self.get_default_image_size('mobilenet'), (224, 224))
+        self.assertEqual(self.get_default_image_size('mobilenetv2'), (224, 224))
+
+    def test_class_names_coverage(self):
+        """Ensure all 5 required animal classes are defined in alphabetical order."""
+        expected_classes = ['cat', 'cow', 'dog', 'lamb', 'zebra']
+        self.assertEqual(self.class_names, expected_classes)
 
 
 class TestSourceFileStructure(unittest.TestCase):

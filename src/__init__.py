@@ -10,7 +10,12 @@ Author: Samiun Mahmud | Member 2 — Baseline CNN & Edge Vision Lead
 try:
     from .model import build_cnn_model
     from .mobilenet import build_mobilenet_model, unfreeze_mobilenet_top_layers
-    from .data_loader import load_and_split_data
+    from .data_loader import (
+        load_and_split_data,
+        get_default_image_size,
+        get_preprocessing_fn,
+        CLASS_NAMES,
+    )
     from .augment import build_augmentation_pipeline
     from .predict import predict_image
 
@@ -19,8 +24,11 @@ try:
         "build_mobilenet_model",
         "unfreeze_mobilenet_top_layers",
         "load_and_split_data",
+        "get_default_image_size",
+        "get_preprocessing_fn",
+        "CLASS_NAMES",
         "build_augmentation_pipeline",
-        "predict_image"
+        "predict_image",
     ]
 except ImportError:
     # TensorFlow not installed — package still importable for structural checks
