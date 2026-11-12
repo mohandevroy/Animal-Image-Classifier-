@@ -2,6 +2,7 @@
 Multiclass Animal Image Classification Package
 Week 1: Custom CNN Baseline (Model 3)
 Week 2: MobileNetV2 Transfer Learning (Model 4)
+Week 3: Feature Visualization — PCA & t-SNE projections
 Author: Samiun Mahmud | Member 2 — Baseline CNN & Edge Vision Lead
 """
 
@@ -33,3 +34,10 @@ try:
 except ImportError:
     # TensorFlow not installed — package still importable for structural checks
     __all__ = []
+
+# Visualization utilities — always importable (sklearn + matplotlib only, no TF)
+try:
+    from .visualize import extract_features, plot_pca, plot_tsne, plot_pca_and_tsne
+    __all__ += ["extract_features", "plot_pca", "plot_tsne", "plot_pca_and_tsne"]
+except ImportError:
+    pass
