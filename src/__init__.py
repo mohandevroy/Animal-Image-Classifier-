@@ -41,3 +41,10 @@ try:
     __all__ += ["extract_features", "plot_pca", "plot_tsne", "plot_pca_and_tsne"]
 except ImportError:
     pass
+
+# Ablation study utilities — always importable (numpy + matplotlib only, no TF)
+try:
+    from .ablation import plot_ablation_curves, summarise_ablation
+    __all__ += ["plot_ablation_curves", "summarise_ablation"]
+except ImportError:
+    pass
