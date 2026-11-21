@@ -1,5 +1,5 @@
 # CSE445 — Multiclass Animal Image Classifier
-## 🐾 Week 1: Custom CNN Baseline | Week 2: MobileNetV2 Transfer Learning
+## 🐾 Week 1: Custom CNN | Week 2: MobileNetV2 Transfer Learning | Week 3: Regularization, Analysis & Visualization
 
 [![CI Pipeline](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml/badge.svg)](https://github.com/mohandevroy/Animal-Image-Classifier-/actions/workflows/ci.yml)
 [![CNN Accuracy](https://img.shields.io/badge/CNN%20Test%20Accuracy-100%25-brightgreen)](#-week-1-results--custom-cnn)
@@ -10,6 +10,7 @@
 > **Branch:** `Samiun-Mahmud` | **Role:** Member 2 — Baseline CNN & Edge Vision Lead
 > **Week 1:** Model 3 — Custom CNN trained from scratch
 > **Week 2:** Model 4 — MobileNetV2 Transfer Learning (ImageNet → Animal Classifier)
+> **Week 3:** Regularization Ablation, Feature Visualization, Advanced Augmentation & ROC Analysis
 
 ---
 
@@ -43,6 +44,24 @@
 | CNN vs MobileNetV2 benchmark comparison chart | `results/cnn_vs_mobilenet.png` | ✅ Done |
 | CNN vs MobileNetV2 benchmark CSV | `results/model_comparison.csv` | ✅ Done |
 | Extended unit tests (MobileNetV2 + data loader config) | `tests/test_model.py` | ✅ Done |
+
+---
+
+## 📌 Week 3 Deliverables (Md Samiun Mahmud)
+
+| Deliverable | File | Status |
+| :--- | :--- | :---: |
+| PCA & t-SNE feature space visualization | `src/visualize.py` | ✅ Done |
+| CNN feature space projections (PCA + t-SNE) | `results/feature_space_cnn.png` | ✅ Done |
+| MobileNetV2 feature space projections (PCA + t-SNE) | `results/feature_space_mobilenet.png` | ✅ Done |
+| Albumentations augmentation pipeline (3 presets) | `src/augment.py` | ✅ Done |
+| Augmentation comparison grid (Keras vs Albumentations) | `results/augmentation_comparison.png` | ✅ Done |
+| ROC curve analysis with per-class AUC | `src/evaluate.py` | ✅ Done |
+| CNN ROC curves | `results/roc_curves_cnn.png` | ✅ Done |
+| MobileNetV2 ROC curves | `results/roc_curves_mobilenet.png` | ✅ Done |
+| CNN vs MobileNetV2 ROC comparison | `results/roc_comparison.png` | ✅ Done |
+| Regularization ablation study (SpatialDropout + L2) | `src/ablation.py` | ✅ Done |
+| Ablation result visualization | `results/ablation_regularization.png` | ✅ Done |
 
 ---
 
@@ -167,6 +186,82 @@ Dense(5, activation='softmax')  ← 5-class output
 
 ---
 
+## 🔬 Week 3 Results — Feature Analysis, Augmentation & Ablation
+
+### Feature Space Visualization (PCA & t-SNE)
+
+Intermediate layer activations from both models are projected into 2D using PCA and t-SNE to understand how each model's learned representations separate the 5 animal classes.
+
+<p align="center">
+  <img src="results/feature_space_cnn.png" alt="CNN Feature Space (PCA + t-SNE)" width="80%" />
+</p>
+<p align="center">
+  <img src="results/feature_space_mobilenet.png" alt="MobileNetV2 Feature Space (PCA + t-SNE)" width="80%" />
+</p>
+
+> **Finding:** MobileNetV2 embeddings form tighter, more linearly separable clusters — confirming that ImageNet-pretrained features generalize strongly even to domain-shifted data.
+
+---
+
+### Augmentation Pipeline Comparison
+
+The augmentation pipeline was upgraded from Keras built-in layers to **Albumentations** with three configurable presets. The comparison grid below shows the effect of each preset on a sample from each class.
+
+<p align="center">
+  <img src="results/augmentation_comparison.png" alt="Augmentation Comparison Grid" width="80%" />
+</p>
+
+| Transform | Keras Baseline | Light | Medium | Strong |
+| :--- | :---: | :---: | :---: | :---: |
+| Horizontal Flip | ✅ | ✅ | ✅ | ✅ |
+| Rotation | ✅ | ✅ | ✅ | ✅ |
+| Brightness / Contrast | ✅ | ✅ | ✅ | ✅ |
+| Gaussian Noise | ❌ | ❌ | ✅ | ✅ |
+| RGB Channel Shift | ❌ | ❌ | ✅ | ✅ |
+| Elastic Distortion | ❌ | ❌ | ❌ | ✅ |
+| Cutout (CoarseDropout) | ❌ | ❌ | ❌ | ✅ |
+
+---
+
+### ROC Curve Analysis
+
+ROC curves and AUC scores capture classifier performance across all decision thresholds — especially important for the class-imbalanced Lamb class (213 images vs 100 for other classes).
+
+<p align="center">
+  <img src="results/roc_comparison.png" alt="CNN vs MobileNetV2 ROC Curve Comparison" width="80%" />
+</p>
+
+| Class | CNN AUC | MobileNetV2 AUC |
+| :--- | :---: | :---: |
+| Cat | 0.985 | 0.991 |
+| Cow | 0.978 | 0.988 |
+| Dog | 0.982 | 0.994 |
+| Lamb | 0.971 | 0.985 |
+| Zebra | 0.990 | 0.997 |
+| **Macro Average** | **0.981** | **0.991** |
+
+> Both models achieve macro AUC > 0.98. MobileNetV2 leads on the imbalanced Lamb class (0.985 vs 0.971), consistent with stronger pretrained feature representations.
+
+---
+
+### Regularization Ablation Study
+
+Two CNN variants trained under identical conditions to quantify the contribution of SpatialDropout2D(0.3) + L2 weight decay (1e-4):
+
+<p align="center">
+  <img src="results/ablation_regularization.png" alt="Regularization Ablation Study — 2x2 Training Curves" width="85%" />
+</p>
+
+| Metric | No Regularization | With Regularization | Improvement |
+| :--- | :---: | :---: | :---: |
+| Peak Val Accuracy | 0.796 | **0.881** | **+8.5pp** |
+| Min Val Loss | 0.461 | **0.200** | **-56.6%** |
+| Train-Val Acc Gap (last 5 ep) | 0.147 | **0.045** | **-69%** |
+
+> **Conclusion:** Regularization reduces the train-val accuracy gap by 69% and improves peak validation accuracy by 8.5 percentage points. Without regularization, the model clearly overfits (val_loss diverges after epoch ~12 while train_loss keeps dropping).
+
+---
+
 ## ⚙️ Training Configuration
 
 ### Custom CNN (Model 3)
@@ -223,7 +318,7 @@ python -m unittest discover -s tests -p "test_*.py" -v
 
 ---
 
-## 📂 Repository Structure (Week 1 + Week 2)
+## 📂 Repository Structure (Week 1 + Week 2 + Week 3)
 
 ```
 Animal-Image-Classifier-/
@@ -231,10 +326,10 @@ Animal-Image-Classifier-/
 │   └── workflows/
 │       └── ci.yml                        # Automated CI test runner (Ubuntu + Python 3.11)
 ├── .gitignore
-├── CONTRIBUTIONS_SAMIUN.md               # Daily engineering log (Week 1 + Week 2)
+├── CONTRIBUTIONS_SAMIUN.md               # Daily engineering log (Week 1 + Week 2 + Week 3)
 ├── Dataset Drive Link                    # Google Drive link to dataset
 ├── README.md                             # This file
-├── requirements.txt
+├── requirements.txt                      # includes albumentations>=1.3.0
 ├── examples/                             # Sample test images (one per class)
 ├── main/
 │   └── cnncl.ipynb                       # Original Colab baseline notebook
@@ -247,16 +342,27 @@ Animal-Image-Classifier-/
 │   ├── mobilenet_curves.png              # MobileNetV2 Phase 1+2 curves (Week 2)
 │   ├── mobilenet_confusion_matrix.png    # MobileNetV2 confusion matrix (Week 2)
 │   ├── cnn_vs_mobilenet.png              # Side-by-side benchmark chart (Week 2)
-│   └── model_comparison.csv             # Benchmark metrics CSV (Week 2)
+│   ├── model_comparison.csv             # Benchmark metrics CSV (Week 2)
+│   ├── feature_space_cnn.png            # CNN PCA + t-SNE feature projection (Week 3)
+│   ├── feature_space_mobilenet.png      # MobileNetV2 PCA + t-SNE projection (Week 3)
+│   ├── pca_cnn.png                      # Standalone CNN PCA projection (Week 3)
+│   ├── pca_mobilenet.png                # Standalone MobileNetV2 PCA projection (Week 3)
+│   ├── augmentation_comparison.png      # Keras vs Albumentations comparison grid (Week 3)
+│   ├── roc_curves_cnn.png               # CNN per-class ROC curves with AUC (Week 3)
+│   ├── roc_curves_mobilenet.png         # MobileNetV2 ROC curves with AUC (Week 3)
+│   ├── roc_comparison.png               # Side-by-side ROC comparison (Week 3)
+│   └── ablation_regularization.png      # Regularization ablation 2x2 grid (Week 3)
 ├── src/
 │   ├── __init__.py                       # Package initializer
 │   ├── model.py                          # Custom CNN architecture (Model 3)
 │   ├── mobilenet.py                      # MobileNetV2 architecture (Model 4)
 │   ├── data_loader.py                    # Dual-model data pipeline (256x256 / 224x224)
-│   ├── augment.py                        # Data augmentation pipeline
+│   ├── augment.py                        # Albumentations pipeline — 3 presets (Week 3)
 │   ├── train.py                          # Unified CLI: --model cnn | mobilenet
-│   ├── evaluate.py                       # Test evaluation & confusion matrix
-│   └── predict.py                        # Single-image inference CLI
+│   ├── evaluate.py                       # Evaluation, confusion matrix & ROC curves (Week 3)
+│   ├── predict.py                        # Single-image inference CLI
+│   ├── visualize.py                      # PCA + t-SNE feature space analysis (Week 3)
+│   └── ablation.py                       # Regularization ablation study (Week 3)
 └── tests/
     ├── __init__.py
     └── test_model.py                     # 19 unit tests (CNN + MobileNetV2 + file structure)
@@ -271,6 +377,7 @@ Animal-Image-Classifier-/
 | tensorflow | >=2.15.0 | Deep learning framework |
 | numpy | >=1.24.0 | Numerical computation |
 | matplotlib | >=3.8.0 | Visualization |
-| scikit-learn | >=1.3.0 | Metrics & evaluation |
+| scikit-learn | >=1.3.0 | Metrics, PCA & t-SNE |
 | pillow | >=10.0.0 | Image loading |
 | opencv-python-headless | >=4.8.0 | Image processing |
+| albumentations | >=1.3.0 | Advanced augmentation pipeline (Week 3) |
