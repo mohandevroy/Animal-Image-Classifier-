@@ -17,8 +17,8 @@
 | :--- | :--- | :--- | :--- |
 | Mohan Dev Roy | Data Lead & Classical ML | `Mohan-Dev-Roy` | Model 1: YOLO11-cls|
 | **Samiun Mahmud** | **Baseline CNN & Edge Vision** | **`Samiun-Mahmud`** | **Model 3: Custom CNN (Scratch Baseline)** ✅ |
-| Sudarshan Ghosh | Deep Residual & Scaled Vision | `Sudarshan-Ghosh` | Model 5: ResNet50 Transfer Learning |
-| Susmit Talukder | Transformers, YOLO & Web App | `Susmit-Talukder` |  Model 6: Random Forest (HOG + Color) |
+| Sudarshan Ghosh | 
+| Susmit Talukder |
 
 ---
 
